@@ -1,5 +1,29 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Image, StyleSheet, View } from 'react-native';
+import Text from './Text';
+import Counts from './Counts';
+
+const styles = StyleSheet.create({
+  itemContainer: {
+    backgroundColor: '#fff',
+    padding: 20
+  },
+  subContainer: {
+    flexDirection: 'row'
+  },
+  detailContainer: {
+    paddingHorizontal: 15,
+    alignItems: 'flex-start'
+  },
+  description: {
+    marginVertical: 10
+  },
+  avatar: {
+    width: 50,
+    height: 50,
+    borderRadius: 5
+  }
+});
 
 const RepositoryItem = ({ item }) => {
   const {
@@ -9,16 +33,24 @@ const RepositoryItem = ({ item }) => {
     stargazersCount,
     forksCount,
     reviewCount,
-    ratingAverage } = item;
+    ratingAverage,
+    ownerAvatarUrl } = item;
   return (
-    <View>
-      <Text>Full name: {fullName}</Text>
-      <Text>Description: {description}</Text>
-      <Text>Language: {language}</Text>
-      <Text>Stars: {stargazersCount}</Text>
-      <Text>Forks: {forksCount}</Text>
-      <Text>Reviews: {reviewCount}</Text>
-      <Text>Rating: {ratingAverage}</Text>
+    <View style={styles.itemContainer}>
+      <View style={styles.subContainer}>
+        <Text>
+          <Image style={styles.avatar} source={{ uri: ownerAvatarUrl }} />
+        </Text>
+        <View style={styles.detailContainer}>
+          <Text fontWeight="bold">{fullName}</Text>
+          <Text color="textSecondary" style={styles.description}>{description}</Text>
+          <Text buttonStyle="primary">{language}</Text>
+        </View>
+      </View>
+      <Counts
+        style={styles.subContainer}
+        item={{ stargazersCount, forksCount, reviewCount, ratingAverage }}
+      />
     </View>
   );
 };

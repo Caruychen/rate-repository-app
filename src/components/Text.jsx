@@ -25,9 +25,16 @@ const styles = StyleSheet.create({
   fontWeightBold: {
     fontWeight: theme.fontWeights.bold,
   },
+  buttonPrimary: {
+    backgroundColor: theme.colors.primary,
+    color: 'white',
+    padding: 5,
+    borderRadius: 3,
+    overflow: 'hidden'
+  }
 });
 
-const Text = ({ color, fontSize, fontWeight, style, ...props }) => {
+const Text = ({ color, fontSize, fontWeight, buttonStyle, style, ...props }) => {
   const textStyle = [
     styles.text,
     color === 'textSecondary' && styles.colorTextSecondary,
@@ -35,6 +42,7 @@ const Text = ({ color, fontSize, fontWeight, style, ...props }) => {
     color == 'white' && styles.headerPrimary,
     fontSize === 'subheading' && styles.fontSizeSubheading,
     fontWeight === 'bold' && styles.fontWeightBold,
+    buttonStyle === 'primary' && styles.buttonPrimary,
     style,
   ];
 
