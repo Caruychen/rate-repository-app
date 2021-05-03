@@ -9,11 +9,12 @@ const styles = StyleSheet.create({
     padding: 20
   },
   subContainer: {
-    flexDirection: 'row'
+    flexDirection: 'row',
   },
   detailContainer: {
     paddingHorizontal: 15,
-    alignItems: 'flex-start'
+    alignItems: 'flex-start',
+    flex: 1
   },
   description: {
     marginVertical: 10
