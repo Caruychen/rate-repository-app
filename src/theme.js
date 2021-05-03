@@ -5,7 +5,8 @@ const theme = {
     primary: '#0366d6',
     backgroundDark: '#24292e',
     backgroundPrimary: '#e1e4e8',
-    headerPrimary: '#F5F5F5'
+    headerPrimary: '#F5F5F5',
+    borderGray: '#808080'
   },
   fontSizes: {
     body: 14,

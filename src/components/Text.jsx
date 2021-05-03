@@ -30,7 +30,8 @@ const styles = StyleSheet.create({
     color: 'white',
     padding: 5,
     borderRadius: 3,
-    overflow: 'hidden'
+    overflow: 'hidden',
+    textAlign: 'center'
   }
 });
 
