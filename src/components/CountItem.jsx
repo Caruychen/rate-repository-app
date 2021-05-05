@@ -11,11 +11,11 @@ const styles = StyleSheet.create({
   }
 });
 
-const CountItem = ({ count, text }) => {
+const CountItem = ({ count, text, testID }) => {
   const formattedCount = count < 1000 ? count : Math.round(count / 100) / 10 + 'k';
   return (
     <View style={styles.container}>
-      <Text fontWeight="bold">{formattedCount}</Text>
+      <Text testID={testID} fontWeight="bold">{formattedCount}</Text>
       <Text color="textSecondary">{text}</Text>
     </View>
   );

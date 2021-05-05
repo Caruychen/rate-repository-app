@@ -43,9 +43,9 @@ const RepositoryItem = ({ item }) => {
           <Image style={styles.avatar} source={{ uri: ownerAvatarUrl }} />
         </Text>
         <View style={styles.detailContainer}>
-          <Text fontWeight="bold">{fullName}</Text>
-          <Text color="textSecondary" style={styles.description}>{description}</Text>
-          <Text buttonStyle="primary">{language}</Text>
+          <Text testID="fullName" fontWeight="bold">{fullName}</Text>
+          <Text testID="description" color="textSecondary" style={styles.description}>{description}</Text>
+          <Text testID="language" buttonStyle="primary">{language}</Text>
         </View>
       </View>
       <Counts
