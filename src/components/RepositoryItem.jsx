@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   detailContainer: {
-    paddingHorizontal: 15,
+    paddingLeft: 15,
     alignItems: 'flex-start',
     flex: 1
   },
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
   }
 });
 
-const RepositoryItem = ({ item, showLink }) => {
+const RepositoryItem = ({ item, showLink, style }) => {
   const {
     fullName,
     description,
@@ -50,7 +50,7 @@ const RepositoryItem = ({ item, showLink }) => {
   };
 
   return (
-    <View style={styles.itemContainer}>
+    <View style={[styles.itemContainer, style]}>
       <View style={styles.subContainer}>
         <Text>
           <Image style={styles.avatar} source={{ uri: ownerAvatarUrl }} />
