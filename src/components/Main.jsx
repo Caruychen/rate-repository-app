@@ -5,9 +5,9 @@ import { Route, Switch, Redirect } from 'react-router-native';
 import RepositoryList from './RepositoryList';
 import AppBar from './AppBar';
 import theme from '../theme';
-import SignIn from './SignIn';
+import SignIn from './Forms/SignIn';
 import RepositoryView from './RepositoryView';
-import Review from './Review';
+import Review from './Forms/Review';
 
 const styles = StyleSheet.create({
   container: {

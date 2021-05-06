@@ -4,12 +4,12 @@ import { Pressable, StyleSheet, View } from 'react-native';
 import * as yup from 'yup';
 
 import FormikTextInput from './FormikTextInput';
-import Text from './Text';
+import Text from '../Text';
 
-import theme from '../theme';
-import useCreateReview from '../hooks/useCreateReview';
+import theme from '../../theme';
+import useCreateReview from '../../hooks/useCreateReview';
 import { useHistory } from 'react-router';
-import useErrorMessage from '../hooks/useErrorMessage';
+import useErrorMessage from '../../hooks/useErrorMessage';
 
 const styles = StyleSheet.create({
   container: {

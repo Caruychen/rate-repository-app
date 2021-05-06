@@ -4,10 +4,10 @@ import { Pressable, StyleSheet, View } from 'react-native';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 
-import theme from '../theme';
+import theme from '../../theme';
 import FormikTextInput from './FormikTextInput';
-import Text from './Text';
-import useSignIn from '../hooks/useSignIn';
+import Text from '../Text';
+import useSignIn from '../../hooks/useSignIn';
 import { useHistory } from 'react-router';
 
 const styles = StyleSheet.create({
