@@ -15,14 +15,18 @@ const styles = StyleSheet.create({
 
 const AppBar = () => {
   const { authorizedUser } = useAuthorizedUser();
-  
+
   return (
     <View style={styles.container}>
       <ScrollView horizontal>
         <AppBarTab text="Repositories" path="/" />
         {
           authorizedUser
-            ? <SignOutTab />
+            ?
+            <>
+              <AppBarTab text="Create a review" path="/review"/>
+              <SignOutTab />
+            </>
             : <AppBarTab text="Sign in" path="/signin" />
         }
       </ScrollView>

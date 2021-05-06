@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
 
 const TextInput = ({ style, error, ...props }) => {
   const textInputStyle = [styles.input, style, error && styles.inputError];
-  return <NativeTextInput style={textInputStyle} {...props} />;
+  return <NativeTextInput style={textInputStyle} {...props} keyboardType={props.numeric ? 'number-pad' : 'default'} />;
 };
 
 export default TextInput;

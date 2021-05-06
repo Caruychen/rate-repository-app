@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
   formInputs: {
     marginTop: 20
   },
-  signIn: {
+  submit: {
     marginVertical: 20,
     padding: 15,
     fontSize: theme.fontSizes.subheading,
@@ -48,7 +48,7 @@ const SignInForm = ({ onSubmit }) => {
       <FormikTextInput testID="usernameField" name="username" placeholder="Username" style={styles.formInputs} />
       <FormikTextInput testID="passwordField" name="password" placeholder="Password" style={styles.formInputs} secureTextEntry />
       <Pressable testID="submitButton" onPress={onSubmit}>
-        <Text buttonStyle="primary" style={styles.signIn}>Sign in</Text>
+        <Text buttonStyle="primary" style={styles.submit}>Sign in</Text>
       </Pressable>
     </View>
   );
