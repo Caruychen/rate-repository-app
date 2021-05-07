@@ -49,6 +49,8 @@ export class RepositoryListContainer extends React.Component {
         renderItem={this.renderItem}
         ItemSeparatorComponent={ItemSeparator}
         ListHeaderComponent={this.renderHeader}
+        onEndReached={this.props.onEndReached}
+        onEndReachedThreshold={0.5}
       />
     );
   }
@@ -68,7 +70,13 @@ const RepositoryList = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [searchKeyword] = useDebounce(searchQuery, 500);
 
-  const { repositories } = useRepositories({ ...principles[orderPrinciple], searchKeyword });
+  const { repositories, fetchMore } = useRepositories({
+    ...principles[orderPrinciple],
+    searchKeyword,
+    first: 8
+  });
+  
+  const onEndReached = () => fetchMore();
 
   return (
     <View>
@@ -85,6 +93,7 @@ const RepositoryList = () => {
         orderByLabel={principles[orderPrinciple].label}
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
+        onEndReached={onEndReached}
         history={history}
       />
     </View>

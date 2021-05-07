@@ -3,13 +3,19 @@ import { REPOSITORY_FIELDS, REVIEW_FIELDS } from './fragments';
 
 export const GET_REPOSITORIES = gql`
 ${REPOSITORY_FIELDS}
-query Repositories($orderBy: AllRepositoriesOrderBy, $orderDirection: OrderDirection, $searchKeyword: String) {
-  repositories(orderBy: $orderBy, orderDirection: $orderDirection, searchKeyword: $searchKeyword) {
+query Repositories($orderBy: AllRepositoriesOrderBy, $orderDirection: OrderDirection, $searchKeyword: String,
+  $after: String, $first: Int) {
+  repositories(orderBy: $orderBy, orderDirection: $orderDirection, searchKeyword: $searchKeyword,
+    after: $after, first: $first) {
     edges {
       cursor,
       node {
         ...RepositoryFields
       }
+    }
+    pageInfo {
+      hasNextPage
+      endCursor
     }
   }
 }`;
