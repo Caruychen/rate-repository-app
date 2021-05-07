@@ -5,6 +5,7 @@ const theme = {
     textPrimary: '#24292e',
     textSecondary: '#586069',
     primary: '#0366d6',
+    danger: '#c82333',
     backgroundDark: '#24292e',
     backgroundPrimary: '#e1e4e8',
     headerPrimary: '#F5F5F5',

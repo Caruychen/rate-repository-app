@@ -32,6 +32,14 @@ const styles = StyleSheet.create({
     borderRadius: 3,
     overflow: 'hidden',
     textAlign: 'center'
+  },
+  buttonDanger: {
+    backgroundColor: theme.colors.danger,
+    color: 'white',
+    padding: 5,
+    borderRadius: 3,
+    overflow: 'hidden',
+    textAlign: 'center'
   }
 });
 
@@ -44,6 +52,7 @@ const Text = ({ color, fontSize, fontWeight, buttonStyle, style, ...props }) => 
     fontSize === 'subheading' && styles.fontSizeSubheading,
     fontWeight === 'bold' && styles.fontWeightBold,
     buttonStyle === 'primary' && styles.buttonPrimary,
+    buttonStyle === 'danger' && styles.buttonDanger,
     style,
   ];
 
