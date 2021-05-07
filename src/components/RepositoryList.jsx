@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { FlatList, View, StyleSheet, Pressable } from 'react-native';
-import { useHistory } from 'react-router';
+import { Searchbar } from 'react-native-paper';
+import { useDebounce } from 'use-debounce';
 import useRepositories from '../hooks/useRepositories';
 import RepositoryItem from './RepositoryItem';
 import ModalButton from './ModalButton';
 import OrderRepositoryModal from './Modals/OrderRepositoryModal';
+import { useHistory } from 'react-router';
 
 const styles = StyleSheet.create({
   separator: {
@@ -14,34 +16,47 @@ const styles = StyleSheet.create({
 
 const ItemSeparator = () => <View style={styles.separator} />;
 
-export const RepositoryListContainer = ({ repositories, setModalVisible, orderByLabel }) => {
-  const history = useHistory();
-
-  // Get the nodes from the edges array
-  const repositoryNodes = repositories
-    ? repositories.edges.map(edge => edge.node)
-    : [];
-
-  const renderItem = ({ item }) => {
+export class RepositoryListContainer extends React.Component {
+  renderItem = ({ item }) => {
     return (
-      <Pressable onPress={() => history.push(`/repository/${item.id}`)}>
+      <Pressable onPress={() => this.props.history.push(`/repository/${item.id}`)}>
         <RepositoryItem item={item} />
       </Pressable>
     );
-  };
+  }
 
-  return (
-    <FlatList
-      data={repositoryNodes}
-      ItemSeparatorComponent={ItemSeparator}
-      renderItem={renderItem}
-      ListHeaderComponent={() => <ModalButton
-        setModalVisible={setModalVisible} label={orderByLabel} />}
-    />
-  );
-};
+  renderHeader = () => {
+    const props = this.props;
+    return (<>
+      <Searchbar
+        placeholder="Search"
+        onChangeText={(query) => props.setSearchQuery(query)}
+        value={props.searchQuery}
+      />
+      <ModalButton
+        setModalVisible={props.setModalVisible} label={props.orderByLabel}
+      />
+    </>);
+  }
+
+  render() {
+    const repositoryNodes = this.props.repositories
+      ? this.props.repositories.edges.map(edge => edge.node)
+      : [];
+    return (
+      <FlatList
+        data={repositoryNodes}
+        renderItem={this.renderItem}
+        ItemSeparatorComponent={ItemSeparator}
+        ListHeaderComponent={this.renderHeader}
+      />
+    );
+  }
+}
 
 const RepositoryList = () => {
+  const history = useHistory();
+
   const [modalVisible, setModalVisible] = useState(false);
   const [orderPrinciple, setOrderPrincple] = useState(0);
   const principles = [
@@ -49,7 +64,12 @@ const RepositoryList = () => {
     { orderBy: 'RATING_AVERAGE', orderDirection: 'DESC', label: "Highest rated repositories" },
     { orderBy: 'RATING_AVERAGE', orderDirection: 'ASC', label: "Lowest rated repositories" }
   ];
-  const { repositories } = useRepositories(principles[orderPrinciple]);
+
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchKeyword] = useDebounce(searchQuery, 500);
+
+  const { repositories } = useRepositories({ ...principles[orderPrinciple], searchKeyword });
+
   return (
     <View>
       <OrderRepositoryModal
@@ -63,6 +83,9 @@ const RepositoryList = () => {
         repositories={repositories}
         setModalVisible={setModalVisible}
         orderByLabel={principles[orderPrinciple].label}
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+        history={history}
       />
     </View>
   );
