@@ -1,6 +1,6 @@
 import { Formik } from 'formik';
 import React from 'react';
-import { Pressable, StyleSheet, View } from 'react-native';
+import { Keyboard, Pressable, StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
 import * as yup from 'yup';
 
 import FormikTextInput from './FormikTextInput';
@@ -53,20 +53,28 @@ const validationSchema = yup.object().shape({
     .max(100, 'Rating must be between 0 and 100')
 });
 
+const DismissKeyboard = ({ children }) => (
+  <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+    {children}
+  </TouchableWithoutFeedback>
+);
+
 const ReviewForm = ({ onSubmit, error }) => {
   return (
-    <View style={styles.container}>
-      <FormikTextInput name="ownerName" placeholder="Repository owner name" style={styles.formInputs} />
-      <FormikTextInput name="repositoryName" placeholder="Repository name" style={styles.formInputs} />
-      <FormikTextInput name="rating" placeholder="Rating between 0 and 100" style={styles.formInputs} numeric />
-      <FormikTextInput name="text" placeholder="Review" style={styles.formInputs} multiline />
-      <Pressable testID="submitButton" onPress={onSubmit}>
-        <Text buttonStyle="primary" style={styles.submit}>Create a review</Text>
-      </Pressable>
-      {error &&
-        <Text style={styles.errorText}>{error}</Text>
-      }
-    </View>
+    <DismissKeyboard>
+      <View style={styles.container}>
+        <FormikTextInput name="ownerName" placeholder="Repository owner name" style={styles.formInputs} />
+        <FormikTextInput name="repositoryName" placeholder="Repository name" style={styles.formInputs} />
+        <FormikTextInput name="rating" placeholder="Rating between 0 and 100" style={styles.formInputs} numeric />
+        <FormikTextInput name="text" placeholder="Review" style={styles.formInputs} multiline />
+        <Pressable testID="submitButton" onPress={onSubmit}>
+          <Text buttonStyle="primary" style={styles.submit}>Create a review</Text>
+        </Pressable>
+        {error &&
+          <Text style={styles.errorText}>{error}</Text>
+        }
+      </View>
+    </DismissKeyboard>
   );
 };
 

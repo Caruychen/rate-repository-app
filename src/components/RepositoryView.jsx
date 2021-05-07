@@ -60,7 +60,7 @@ const ReviewItem = ({ item }) => {
 
 const RepositoryView = () => {
   const { id } = useParams();
-  const { repository, loading } = useRepository(id);
+  const { repository, loading, fetchMore } = useRepository({ id, first: 5 });
   const reviews = repository
     ? repository.reviews.edges.map(edge => edge.node)
     : [];
@@ -73,6 +73,8 @@ const RepositoryView = () => {
       keyExtractor={({ id }) => id}
       ListHeaderComponent={() => <RepositoryItem item={repository} showLink="true" style={styles.headerContainer} />}
       ItemSeparatorComponent={ItemSeparator}
+      onEndReached={() => fetchMore()}
+      onEndReachedThreshold={0.5}
     />
   );
 };

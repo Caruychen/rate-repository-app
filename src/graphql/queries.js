@@ -23,15 +23,20 @@ query Repositories($orderBy: AllRepositoriesOrderBy, $orderDirection: OrderDirec
 export const GET_REPOSITORY = gql`
 ${REPOSITORY_FIELDS}
 ${REVIEW_FIELDS}
-query Repository($id: ID!) {
+query Repository($id: ID!, $after: String, $first: Int) {
   repository(id: $id) {
     ...RepositoryFields
     url
-    reviews {
+    reviews(after: $after, first: $first) {
       edges {
+        cursor
         node {
           ...ReviewFields
         }
+      }
+      pageInfo {
+        hasNextPage
+        endCursor
       }
     }
   }
