@@ -27,5 +27,8 @@ fragment ReviewFields on Review {
     id
     username
   }
+  repository {
+    fullName
+  }
 }
 `;

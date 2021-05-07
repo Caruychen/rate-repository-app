@@ -44,9 +44,22 @@ query Repository($id: ID!, $after: String, $first: Int) {
 `;
 
 export const GET_AUTHORIZED_USER = gql`
-query {
+${REVIEW_FIELDS}
+query AuthorizedUser($includeReviews: Boolean = false, $after: String, $first: Int) {
   authorizedUser {
     id,
-    username
+    username,
+    reviews(after: $after, first: $first) @include(if: $includeReviews) {
+      edges {
+        node {
+          ...ReviewFields
+        }
+        cursor
+      }
+      pageInfo {
+        hasNextPage
+        endCursor
+      }
+    }
   }
 }`;

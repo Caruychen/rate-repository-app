@@ -73,7 +73,7 @@ const RepositoryList = () => {
   const { repositories, fetchMore } = useRepositories({
     ...principles[orderPrinciple],
     searchKeyword,
-    first: 8
+    first: 7
   });
   
   const onEndReached = () => fetchMore();
